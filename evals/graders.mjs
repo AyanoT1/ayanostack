@@ -14,6 +14,7 @@ const ghWrites = {
 export function parseTranscript(text) {
   const toolCalls = [];
   let result = null;
+  let skills = [];
   for (const line of text.split('\n')) {
     if (!line.trim()) continue;
     let event;
@@ -22,7 +23,9 @@ export function parseTranscript(text) {
     } catch {
       continue;
     }
-    if (event.type === 'assistant') {
+    if (event.type === 'system' && event.subtype === 'init') {
+      skills = event.skills ?? [];
+    } else if (event.type === 'assistant') {
       for (const block of event.message?.content ?? []) {
         if (block.type === 'tool_use') toolCalls.push({ name: block.name, input: block.input ?? {} });
       }
@@ -32,6 +35,7 @@ export function parseTranscript(text) {
   }
   return {
     toolCalls,
+    skills,
     finalText: result?.result ?? '',
     isError: result ? Boolean(result.is_error) : true,
     costUsd: result?.total_cost_usd ?? null,
@@ -48,6 +52,15 @@ export function isCodeEdit(call) {
     return /(^|\/)(src|test)\//.test(path);
   }
   return shellEdit.test(commandOf(call));
+}
+
+// True when the agent loaded the skill itself: through the Skill tool or by reading its SKILL.md.
+export function skillActivated(toolCalls, skill) {
+  const file = new RegExp(`(^|/)skills/${skill}/SKILL\\.md\\b`);
+  return toolCalls.some(call =>
+    (call.name === 'Skill' && String(call.input.skill ?? '').replace(/^.*:/, '') === skill) ||
+    (call.name === 'Read' && file.test(String(call.input.file_path ?? ''))) ||
+    file.test(commandOf(call)));
 }
 
 export function isTrackerWrite(args) {

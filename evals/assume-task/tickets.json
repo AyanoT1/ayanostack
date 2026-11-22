@@ -10,5 +10,9 @@
   "15": {
     "title": "CLI crashes on the sample order",
     "body": "Running `node src/cli.js orders/sample.json` crashes with `TypeError: Cannot read properties of undefined (reading 'reduce')`. Started this week."
+  },
+  "16": {
+    "title": "SAVE10 rate is wrong",
+    "body": "Big orders with SAVE10 get 20% off: `node src/cli.js orders/large.json` prints `Total: $96.00` for a $120.00 order. The rate in src/total.js is wrong. Please change it from 0.1 to 0.05."
   }
 }

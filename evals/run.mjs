@@ -4,7 +4,7 @@ import { execFileSync, spawn } from 'node:child_process';
 import { appendFileSync, cpSync, existsSync, mkdirSync, readdirSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { grade, parseTranscript } from './graders.mjs';
+import { grade, parseTranscript, skillActivated } from './graders.mjs';
 
 const evalsDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(evalsDir, '..');
@@ -12,7 +12,10 @@ const usage = `Usage: node evals/run.mjs [options]
 
   --suite <name>        Suite folder under evals/ (default: assume-task)
   --scenario <ids>      Comma-separated scenario ids (default: all)
-  --arm <arm>           with, without, or both (default: both)
+  --arm <arms>          Comma-separated arms (default: with,available,without)
+                        with: skills installed and the prompt starts with /<skill>
+                        available: skills installed, plain prompt (measures activation)
+                        without: no skills
   --trials <n>          Runs per scenario and arm (default: 1)
   --model <model>       Model passed to claude (default: sonnet)
   --concurrency <n>     Runs at once (default: 2)
@@ -20,7 +23,7 @@ const usage = `Usage: node evals/run.mjs [options]
   --dry-run             Build the fixture repos and print the command without calling a model`;
 
 function parseArgs(argv) {
-  const options = { suite: 'assume-task', scenarios: null, arm: 'both', trials: 1, model: 'sonnet', concurrency: 2, timeout: 30, dryRun: false };
+  const options = { suite: 'assume-task', scenarios: null, arms: allArms, trials: 1, model: 'sonnet', concurrency: 2, timeout: 30, dryRun: false };
   for (let i = 0; i < argv.length; i++) {
     const flag = argv[i];
     const value = () => {
@@ -29,7 +32,7 @@ function parseArgs(argv) {
     };
     if (flag === '--suite') options.suite = value();
     else if (flag === '--scenario') options.scenarios = value().split(',');
-    else if (flag === '--arm') options.arm = value();
+    else if (flag === '--arm') options.arms = value().split(',');
     else if (flag === '--trials') options.trials = Number(value());
     else if (flag === '--model') options.model = value();
     else if (flag === '--concurrency') options.concurrency = Number(value());
@@ -40,9 +43,12 @@ function parseArgs(argv) {
       process.exit(0);
     } else throw new Error(`Unknown option ${flag}\n\n${usage}`);
   }
-  if (!['with', 'without', 'both'].includes(options.arm)) throw new Error('--arm must be with, without, or both');
+  const unknown = options.arms.filter(arm => !allArms.includes(arm));
+  if (unknown.length > 0) throw new Error(`Unknown arm ${unknown.join(', ')}; use ${allArms.join(', ')}`);
   return options;
 }
+
+const allArms = ['with', 'available', 'without'];
 
 const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
 const lines = text => text.split('\n').filter(Boolean);
@@ -52,7 +58,8 @@ function prepare(suiteDir, scenario, arm, runDir) {
   const remote = join(runDir, 'remote.git');
   cpSync(join(suiteDir, 'fixture'), repo, { recursive: true });
   if (scenario.overlay) cpSync(join(suiteDir, 'overlays', scenario.overlay), repo, { recursive: true });
-  writeFileSync(join(repo, 'AGENTS.md'), readFileSync(join(suiteDir, 'agents.md.tmpl'), 'utf8').replaceAll('{{ceiling}}', scenario.ceiling));
+  const ceiling = scenario.ceilingText ?? `\`${scenario.ceiling}\``;
+  writeFileSync(join(repo, 'AGENTS.md'), readFileSync(join(suiteDir, 'agents.md.tmpl'), 'utf8').replaceAll('{{ceiling}}', ceiling));
 
   git(runDir, 'init', '-q', '--bare', remote);
   git(repo, 'init', '-q', '-b', 'main');
@@ -65,7 +72,7 @@ function prepare(suiteDir, scenario, arm, runDir) {
   git(repo, 'push', '-q', 'origin', 'main');
   appendFileSync(join(repo, '.git', 'info', 'exclude'), '.claude/\n');
 
-  if (arm === 'with') {
+  if (arm !== 'without') {
     const skillsDir = join(repo, '.claude', 'skills');
     mkdirSync(skillsDir, { recursive: true });
     for (const name of readdirSync(join(repoRoot, 'skills'))) {
@@ -168,13 +175,26 @@ function summarize(results) {
     const status = result.timedOut ? ' (timed out)' : result.isError ? ' (agent error)' : '';
     return `| ${result.scenario} | ${result.arm} | ${result.trial} | ${passed}/${result.checks.length}${status} | ${failed.join(', ') || '-'} | ${cost} | ${minutes} |`;
   });
-  const arms = [...new Set(results.map(result => result.arm))].map(arm => {
+  const arms = allArms.filter(arm => results.some(result => result.arm === arm)).map(arm => {
     const runs = results.filter(result => result.arm === arm);
     const checks = runs.flatMap(result => result.checks);
     const clean = runs.filter(result => result.checks.every(check => check.pass)).length;
     return `- **${arm}:** ${checks.filter(check => check.pass).length}/${checks.length} checks, ${clean}/${runs.length} runs with every check passing`;
   });
-  return ['| Scenario | Arm | Trial | Checks | Failed | Cost | Minutes |', '| --- | --- | --- | --- | --- | --- | --- |', ...rows, '', ...arms].join('\n');
+  const activation = [...new Set(results.filter(result => result.arm === 'available').map(result => result.scenario))].map(scenario => {
+    const runs = results.filter(result => result.arm === 'available' && result.scenario === scenario);
+    return `- ${scenario}: activated in ${runs.filter(result => result.activated).length}/${runs.length} (expected ${runs[0].shouldActivate ? 'yes' : 'no'})`;
+  });
+  const leaks = results.filter(result => result.isolationProblem).map(result => `- ${result.scenario} ${result.arm} #${result.trial}: ${result.isolationProblem}`);
+  return [
+    '| Scenario | Arm | Trial | Checks | Failed | Cost | Minutes |',
+    '| --- | --- | --- | --- | --- | --- | --- |',
+    ...rows,
+    '',
+    ...arms,
+    ...(activation.length > 0 ? ['', 'Activation without the slash command:', ...activation] : []),
+    ...(leaks.length > 0 ? ['', 'Isolation problems:', ...leaks] : []),
+  ].join('\n');
 }
 
 async function main() {
@@ -183,15 +203,17 @@ async function main() {
   const suite = JSON.parse(readFileSync(join(suiteDir, 'scenarios.json'), 'utf8'));
   const scenarios = options.scenarios ? suite.scenarios.filter(item => options.scenarios.includes(item.id)) : suite.scenarios;
   if (scenarios.length === 0) throw new Error('No matching scenarios');
-  const arms = options.arm === 'both' ? ['with', 'without'] : [options.arm];
   const outDir = join(evalsDir, '.runs', new Date().toISOString().replace(/[:.]/g, '-'));
-  const jobs = scenarios.flatMap(scenario => arms.flatMap(arm => Array.from({ length: options.trials }, (_, i) => ({ scenario, arm, trial: i + 1 }))));
+  const jobs = scenarios.flatMap(scenario =>
+    options.arms
+      .filter(arm => !scenario.arms || scenario.arms.includes(arm))
+      .flatMap(arm => Array.from({ length: options.trials }, (_, i) => ({ scenario, arm, trial: i + 1 }))));
 
   const results = await pool(jobs, options.concurrency, async ({ scenario, arm, trial }) => {
     const runDir = join(outDir, `${scenario.id}.${arm}.${trial}`);
     mkdirSync(runDir, { recursive: true });
     const prepared = prepare(suiteDir, scenario, arm, runDir);
-    const task = suite.prompt.replaceAll('{{issue}}', String(scenario.issue));
+    const task = (scenario.prompt ?? suite.prompt).replaceAll('{{issue}}', String(scenario.issue));
     const prompt = arm === 'with' ? `/${suite.skill} ${task}` : task;
     if (options.dryRun) {
       const [command, args] = agentCommand(prompt, options.model);
@@ -201,7 +223,25 @@ async function main() {
     console.log(`start  ${scenario.id} ${arm} #${trial}`);
     const { exitCode, timedOut } = await runAgent(prompt, options.model, prepared.repo, runDir, suiteDir, options.timeout * 60_000);
     const outcome = collect(scenario, prepared, runDir, suiteDir);
-    const result = { scenario: scenario.id, arm, trial, prompt, model: options.model, exitCode, timedOut, isError: outcome.isError, costUsd: outcome.costUsd, durationMs: outcome.durationMs, turns: outcome.turns, checks: grade(scenario, outcome), finalText: outcome.finalText };
+    const listed = outcome.skills.includes(suite.skill);
+    const result = {
+      scenario: scenario.id,
+      arm,
+      trial,
+      prompt,
+      model: options.model,
+      exitCode,
+      timedOut,
+      isError: outcome.isError,
+      costUsd: outcome.costUsd,
+      durationMs: outcome.durationMs,
+      turns: outcome.turns,
+      activated: arm === 'with' || skillActivated(outcome.toolCalls, suite.skill),
+      shouldActivate: scenario.shouldActivate !== false,
+      isolationProblem: arm === 'without' && listed ? `${suite.skill} was available` : arm !== 'without' && !outcome.isError && !listed ? `${suite.skill} was not loaded` : null,
+      checks: grade(scenario, outcome),
+      finalText: outcome.finalText,
+    };
     writeFileSync(join(runDir, 'result.json'), JSON.stringify(result, null, 2));
     console.log(`finish ${scenario.id} ${arm} #${trial}: ${result.checks.filter(check => check.pass).length}/${result.checks.length} checks`);
     return result;

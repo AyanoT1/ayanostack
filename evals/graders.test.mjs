@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
-import { checkNames, grade, isTrackerWrite, parseTranscript } from './graders.mjs';
+import { checkNames, grade, isTrackerWrite, parseTranscript, skillActivated } from './graders.mjs';
 
 const suite = JSON.parse(readFileSync(new URL('./assume-task/scenarios.json', import.meta.url), 'utf8'));
 const scenario = id => suite.scenarios.find(item => item.id === id);
@@ -29,12 +29,23 @@ test('every scenario uses known checks with valid patterns', () => {
       if (entry.pattern) new RegExp(entry.pattern, 'i');
     }
     if (item.reproPattern) new RegExp(item.reproPattern);
+    assert.ok(item.ceiling || item.ceilingText, `${item.id}: needs ceiling or ceilingText`);
+    assert.ok(item.prompt || item.issue, `${item.id}: needs an issue or its own prompt`);
+    for (const arm of item.arms ?? []) assert.ok(['with', 'available', 'without'].includes(arm), `${item.id}: arm ${arm}`);
   }
+});
+
+test('detects when the agent loads the skill on its own', () => {
+  assert.equal(skillActivated([{ name: 'Skill', input: { skill: 'assume-task' } }], 'assume-task'), true);
+  assert.equal(skillActivated([{ name: 'Skill', input: { skill: 'ayanostack:assume-task' } }], 'assume-task'), true);
+  assert.equal(skillActivated([{ name: 'Read', input: { file_path: '/r/.claude/skills/assume-task/SKILL.md' } }], 'assume-task'), true);
+  assert.equal(skillActivated([bash('cat .claude/skills/assume-task/SKILL.md')], 'assume-task'), true);
+  assert.equal(skillActivated([{ name: 'Skill', input: { skill: 'open-pr' } }, bash('cat .claude/skills/assume-task/references/github.md')], 'assume-task'), false);
 });
 
 test('parses tool calls and the final result from stream-json', () => {
   const lines = [
-    { type: 'system', subtype: 'init' },
+    { type: 'system', subtype: 'init', skills: ['assume-task', 'why'] },
     { type: 'assistant', message: { content: [{ type: 'text', text: 'Looking' }, { type: 'tool_use', name: 'Bash', input: { command: 'node src/cli.js orders/sample.json' } }] } },
     { type: 'user', message: { content: [] } },
     { type: 'result', subtype: 'success', is_error: false, result: 'Done', total_cost_usd: 0.5, duration_ms: 1000, num_turns: 3 },
@@ -44,6 +55,7 @@ test('parses tool calls and the final result from stream-json', () => {
   assert.equal(parsed.finalText, 'Done');
   assert.equal(parsed.isError, false);
   assert.equal(parsed.costUsd, 0.5);
+  assert.deepEqual(parsed.skills, ['assume-task', 'why']);
 });
 
 test('a missing result event counts as an error', () => {
