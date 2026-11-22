@@ -1,8 +1,3 @@
----
-name: correct
-description: "Find the mistakes agents keep repeating in this repo and make each one impossible. Try architecture first, then types, then a lint whose error names the fix, then a test, and write docs last. Prove each check fails on a real past mistake. Use for /correct."
----
-
 <!-- From pstack by Lauren Tan (MIT). https://github.com/cursor/plugins/blob/7a583913eb1b8d1a0ee76753d1a2cf072e7b54f9/pstack/skills/correct/SKILL.md -->
 
 # Correct

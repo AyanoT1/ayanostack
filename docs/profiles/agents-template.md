@@ -1,0 +1,47 @@
+# Plantilla de `AGENTS.md` por proyecto
+
+Copia las secciones relevantes al `AGENTS.md` de tu repositorio y rellena los valores reales del proyecto. Las skills de AyanoStack leen estas reglas para saber qué plataforma usar, hasta dónde pueden avanzar solas y qué pueden escribir en el tracker.
+
+> **Compatibilidad entre providers:** Codex y Antigravity leen `AGENTS.md` de forma nativa. Claude Code prioriza `CLAUDE.md` y omite `AGENTS.md` si existe cualquier `CLAUDE.md` en el repo o en directorios padre; para garantizar lectura en los tres, añade `@AGENTS.md` en el `CLAUDE.md` del repositorio.
+
+```markdown
+# Instrucciones del proyecto para AyanoStack
+
+## Perfil y plataforma
+Para las skills de AyanoStack, usa el perfil `github`. <!-- o `bitbucket-jira` -->
+
+- Repositorio / remoto: `origin`
+- Rama base de PRs: `main` <!-- o `develop`, `staging`, etc. -->
+
+## Tableros y fuentes de tickets (`triage`)
+<!-- Lista todas las fuentes que `triage` debe leer para armar el snapshot diario. -->
+- **Mantenimiento / Bugs:** tablero o query `<ID o filtro>` — foco: asignados a mí + sin asignar urgentes o próximos a vencer.
+- **Mejora continua:** tablero o query `<ID o filtro>` — foco: asignados a mí.
+- **Proyecto activo:** tablero o query `<ID o filtro>` — foco: asignados a mí.
+- **Criterios de caducidad / SLA:** `<ej. bugs críticos < 24h, tickets con fecha límite en los próximos 3 días>`.
+
+## Autonomía y techo de entrega (`assume-task` / `open-pr`)
+<!-- Valores sugeridos por fuente o repo: `handoff-only` | `prepare-only` | `draft-pr` | `open-pr` | `merge-main` -->
+- **Techo por defecto:** `prepare-only` <!-- En trabajo: deja rama, commits, pre-PR y descripción listos justo antes del push. En repo personal sin prod: `open-pr` o `merge-main`. -->
+- **Excepciones por tablero:**
+  - Mantenimiento (`easy-fix` / `bug` acotado): `prepare-only`
+  - Cambios de arquitectura, `feature-request` o `research`: `handoff-only`
+
+## Escritura en el tracker (`triage` / `assume-task`)
+<!-- Define qué operaciones sobre Jira o GitHub Issues están autorizadas sin pedir confirmación previa. -->
+- **Mover estado al asumir:** sí (`To Do` → `In Progress`) <!-- o `no` -->
+- **Comentar evidencia verificada:** sí (sin credenciales ni datos sensibles) <!-- o `no` -->
+- **Etiquetar según clasificación:** sí (`easy-fix`, `bug`, `critical-bug`, `feature-missing`, `feature-request`, `requirement-change`, `research`, `architecture-decision`, `architecture-design`) <!-- o `no` -->
+- **Cerrar o reasignar tickets:** no (siempre confirmar)
+
+## Ejecución local para verificación en vivo (`assume-task`)
+- **Levantar app / API:** `<comando, ej. pnpm dev>`
+- **URL base / healthcheck:** `<ej. http://localhost:3000/health>`
+- **Autenticación local de prueba:** `<cómo obtener sesión de prueba sin guardar secretos en el repo>`
+
+## Checks obligatorios y revisión (`open-pr` / `babysit-pr` / `interrogate`)
+- **Checks locales antes de publicar:** `<ej. pnpm typecheck && pnpm lint && pnpm test>`
+- **Checks de CI requeridos:** `<nombres de checks o pipelines>`
+- **Checklist de PR:** `<reglas de título, vínculo a ticket/issue, migraciones, capturas>`
+- **Revisores para `interrogate`:** `<ej. Usa Gemini 4 Neon en esfuerzo alto. Para revisiones multimodelo, suma otro modelo autorizado.>`
+```

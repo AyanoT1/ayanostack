@@ -7,8 +7,7 @@ Skills personales para flujos de ingeniería que uso en la pega y en mis proyect
 | Ruta | Propósito |
 | --- | --- |
 | `skills/` | Una carpeta con `SKILL.md` por flujo reutilizable. |
-| `skills/ayanostack-mode/playbooks/` | Espacio para las guías por tipo de tarea que consultará `ayanostack-mode`. |
-| [Perfiles](docs/profiles/) | Herramientas de cada entorno y cómo seleccionar el perfil. |
+| [Perfiles](docs/profiles/) | Herramientas de cada entorno, plantilla de `AGENTS.md` y cómo seleccionar el perfil. |
 
 ## Daily use
 
@@ -19,40 +18,40 @@ Skills personales para flujos de ingeniería que uso en la pega y en mis proyect
 
 ## Probando
 
+- [`assume-task`](skills/assume-task/SKILL.md) asume un ticket o tarea, replica el fenómeno en vivo con evidencia real (JSON, logs o capturas), clasifica el trabajo (`auto`, `investigate` o `drive`) y llega hasta el techo de entrega definido en `AGENTS.md`.
 - [`benchmark-checklist`](skills/benchmark-checklist/SKILL.md) valida que una medición de rendimiento sostenga la conclusión.
-- [`correct`](skills/correct/SKILL.md) convierte errores recurrentes en restricciones del código o verificaciones reproducibles.
+- [`garden`](skills/garden/SKILL.md) hace mantenimiento de repositorio (código repetido, docs desfasados, higiene y [correct](skills/garden/references/correct.md) para convertir errores recurrentes en restricciones del código).
 - [`gc`](skills/gc/SKILL.md) audita worktrees, ramas y residuos, y borra únicamente los elementos confirmados.
 - [`improve-architecture`](skills/improve-architecture/SKILL.md) presenta oportunidades concretas de refactor en un informe HTML.
+- [`install`](skills/install/SKILL.md) instala o enlaza las skills en tu máquina y configura el `AGENTS.md` de un repositorio a partir de la plantilla.
 - [`interrogate`](skills/interrogate/SKILL.md) revisa el cambio con evidencia. En T3 Code puede usar un panel independiente configurable, con preferencia por Neon.
 - [`open-pr`](skills/open-pr/SKILL.md) prepara, abre o actualiza un PR con el checklist del proyecto.
+- [`overnight`](skills/overnight/SKILL.md) ejecuta trabajo largo y desatendido (`todo-list`, `implement-feature`, `research-feature`, `fixes`, `gardening`) aprovechando el tiempo disponible para verificar a fondo y cerrar con un reporte en HTML (`press-release`).
 - [`press-release`](skills/press-release/SKILL.md) entrega un enlace al anuncio de lanzamiento en HTML.
 - [`recall`](skills/recall/SKILL.md) recupera contexto reciente de un tema entre chats y lo contrasta con el estado actual.
 - [`reflect`](skills/reflect/SKILL.md) convierte lecciones de una sesión en propuestas concretas para el flujo de trabajo.
 - [`simplify-diff`](skills/simplify-diff/SKILL.md) recorta un diff tras buscar primero lo que ya resuelve el repo.
 - [`swarm`](skills/swarm/SKILL.md) reparte un trabajo en paralelo o compara modelos por encargo. Queda para tareas que justifiquen ese costo.
+- [`triage`](skills/triage/SKILL.md) revisa los tableros declarados en `AGENTS.md`, arma un snapshot diario priorizado (asignados a ti + urgentes sin asignar), marca candidatos delegables y lanza threads de `assume-task` tras tu confirmación.
 - [`typescript-best-practices`](skills/typescript-best-practices/SKILL.md) revisa contratos y tipos siguiendo las convenciones del proyecto.
 - [`why`](skills/why/SKILL.md) reconstruye el motivo de una decisión con fuentes y evidencia.
 
-## Pendientes de probar o revisar
+## Flujo de trabajo y PR
 
-- `arena` podría servir para comparar soluciones al mismo encargo. La revisión con varios modelos ya se puede pedir desde `interrogate`.
-- `show-me-your-work` encaja si una tarea larga y desatendida necesita dejar una bitácora de decisiones que un revisor pueda auditar. Para un PR rutinario, esa evidencia suele caber en la descripción.
-- Los `principle-*` quedan pendientes de medir. Para probar si uno aporta, toma tareas donde se esperaría que aplique y registra si se cargó, qué decisión cambió y qué resultado verificable produjo. `principle-attack-the-premise` tiene un primer caso en la guía de causa raíz de `open-pr` cuando se repiten workarounds.
+Usa [`install`](skills/install/SKILL.md) para enlazar las skills en una misma raíz y que sus referencias relativas funcionen en Claude Code, Codex, Antigravity y T3 Code.
 
-## Flujo de PR
-
-Instala las skills del flujo en una misma raíz para que sus referencias relativas funcionen. `open-pr` prepara el cambio con [pre-PR](skills/open-pr/references/pre-pr.md), que revisa la [causa raíz](skills/open-pr/references/right-fix.md), simplifica, aplica `no-comments` y verifica con `interrogate` y `blast-radius`. La revisión que antes hacía `pre-review` vive en `interrogate`. Las decisiones de arquitectura que afectan el cambio se revisan con la causa raíz.
-
-Después de las verificaciones del proyecto, `open-pr` publica el PR, pasa por la auditoría `gc` y entrega el PR a `babysit-pr`. Para revisar sin publicar, pide a `open-pr` solo la preparación.
+- **Entrada diaria:** [`triage`](skills/triage/SKILL.md) revisa los tableros declarados en `AGENTS.md` y lanza [`assume-task`](skills/assume-task/SKILL.md) sobre los tickets confirmados para replicar en vivo, clasificar y avanzar hasta el techo del proyecto.
+- **Cierre de PR:** [`open-pr`](skills/open-pr/SKILL.md) prepara el cambio con [pre-PR](skills/open-pr/references/pre-pr.md) ([causa raíz](skills/open-pr/references/right-fix.md), `simplify-diff`, `no-comments`, `interrogate` y `blast-radius`). Tras los checks del proyecto, publica el PR, audita residuos con `gc` y entrega seguimiento a `babysit-pr`. Para revisar sin publicar, pide `open-pr` en modo preparación.
 
 ## Perfiles por proyecto
 
 - [Bitbucket + Jira](docs/profiles/bitbucket-jira.md) para el trabajo.
 - [GitHub](docs/profiles/github.md) para proyectos personales.
+- [Plantilla de `AGENTS.md`](docs/profiles/agents-template.md) para configurar tableros, techo de autonomía (`prepare-only`, `open-pr`, `merge-main`), escritura en el tracker y verificación local por proyecto.
 
-En el `AGENTS.md` de cada proyecto declara el perfil con una línea como `Para las skills de AyanoStack, usa el perfil bitbucket-jira.` Para un proyecto personal, usa `github`. Ahí mismo deja el checklist de PR, los checks requeridos y cualquier convención local.
+En el `AGENTS.md` de cada proyecto declara el perfil con una línea como `Para las skills de AyanoStack, usa el perfil bitbucket-jira.` Para un proyecto personal, usa `github`. Ahí mismo deja los tableros de `triage`, el techo de entrega de `assume-task`, permisos de escritura en el tracker, cómo levantar la app en local, el checklist de PR y los checks requeridos.
 
-Cada `SKILL.md` define el flujo común. `open-pr` y `babysit-pr` leen únicamente la referencia del perfil declarado. La máquina personal usa `gh` o las herramientas de PR de T3 Code para GitHub. La del trabajo usa `twg` para Bitbucket y Jira. Si falta el perfil, confírmalo antes de escribir en una plataforma.
+Cada `SKILL.md` define el flujo común. `triage`, `assume-task`, `open-pr` y `babysit-pr` leen únicamente la referencia del perfil declarado. La máquina personal usa `gh` o las herramientas de T3 Code para GitHub. La del trabajo usa `twg` para Bitbucket y Jira. Si falta el perfil o la autorización de escritura, confírmalo antes de escribir en una plataforma.
 
 ## Antes de comitear
 
