@@ -21,7 +21,12 @@ Para las skills de AyanoStack, usa el perfil `github`. <!-- o `bitbucket-jira` -
 - **Criterios de caducidad / SLA:** `<ej. bugs críticos < 24h, tickets con fecha límite en los próximos 3 días>`.
 
 ## Autonomía y techo de entrega (`assume-task` / `open-pr`)
-<!-- Valores sugeridos por fuente o repo: `handoff-only` | `prepare-only` | `draft-pr` | `open-pr` | `merge-main` -->
+- `handoff-only`: solo diagnóstico. No edites código ni hagas commits.
+- `prepare-only`: arregla en una rama nueva y commitea localmente. No hagas push ni abras PR.
+- `draft-pr`: publica la rama y abre el PR como borrador.
+- `open-pr`: publica la rama y abre el PR listo para revisión. No mergees.
+- `merge-main`: mergea a la rama base solo si pasan todos los checks requeridos.
+
 - **Techo por defecto:** `prepare-only` <!-- En trabajo: deja rama, commits, pre-PR y descripción listos justo antes del push. En repo personal sin prod: `open-pr` o `merge-main`. -->
 - **Excepciones por tablero:**
   - Mantenimiento (`easy-fix` / `bug` acotado): `prepare-only`
