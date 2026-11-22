@@ -3,6 +3,8 @@ name: open-pr
 description: Prepare, open, or update a pull request using the project's PR checklist. Also use for a prepare-only pass before opening a PR.
 ---
 
+<!-- Inspired by pstack's opening-a-pr playbook and fix-root-causes principle by Lauren Tan (MIT). See the bundled LICENSE. https://github.com/cursor/plugins/blob/7a583913eb1b8d1a0ee76753d1a2cf072e7b54f9/pstack/skills/poteto-mode/playbooks/opening-a-pr.md -->
+
 # Open PR
 
 1. Read the project’s `AGENTS.md` and its PR checklist. Use the declared profile, `github` or `bitbucket-jira`. If it is missing or conflicts with the requested destination, ask before publishing. Confirm the repository, head, destination, and work item from the request and existing PR. Use the actual destination as the review base.

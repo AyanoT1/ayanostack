@@ -3,6 +3,8 @@ name: install
 description: Set up AyanoStack across Claude Code, Codex, Antigravity, and T3 Code—symlink skills so `$skill` discovery and relative links work, verify AGENTS.md visibility across all providers, or bootstrap a repository's AGENTS.md from the project template. Use for /install or first-time setup.
 ---
 
+<!-- Model role lines inspired by pstack's setup-pstack by Lauren Tan (MIT). See the bundled LICENSE. https://github.com/cursor/plugins/blob/7a583913eb1b8d1a0ee76753d1a2cf072e7b54f9/pstack/skills/setup-pstack/SKILL.md -->
+
 # Install
 
 Determine whether the user wants **host installation** (linking AyanoStack skills onto this machine for their AI providers), **project bootstrap** (configuring a repository's `AGENTS.md`), or **both**. Default to project bootstrap inside another repository where AyanoStack is already installed, and to host installation when run from the AyanoStack repo itself.
@@ -31,7 +33,7 @@ Configure the target repository once so every AyanoStack skill and every provide
    - **Ticket sources.** Boards, project keys, or filters for [triage](../triage/SKILL.md) plus any unassigned urgent/expiring watch.
    - **Delivery ceiling.** Default and per-board limit (`handoff-only`, `prepare-only`, `draft-pr`, `open-pr`, or `merge-main`).
    - **Tracker writes.** Whether [assume-task](../assume-task/SKILL.md) may transition status, post sanitized evidence comments, or apply classification labels.
-   - **Reviewer models.** Optional independent or multi-model preference for [interrogate](../interrogate/SKILL.md).
-4. **Write cleanly.** Merge the AyanoStack section into the project's `AGENTS.md` following [the project template](../../docs/profiles/agents-template.md). Preserve unrelated instructions and never write real tokens, credentials, or local machine paths.
+   - **Model roles.** The `interrogate reviewers` and `swarm workers` lines for [interrogate](../interrogate/SKILL.md) and [swarm](../swarm/SKILL.md). Offer only models you have confirmed are available on this host. `inherit` uses the current chat model.
+4. **Write cleanly.** Merge the AyanoStack section into the project's `AGENTS.md` following [the project template](references/agents-template.md). Preserve unrelated instructions and never write real tokens, credentials, or local machine paths.
 
 **Reply:** provider link status (including T3 Code `$` readiness), `AGENTS.md` / `CLAUDE.md` verification, detected CLIs, and any remaining placeholders to fill in.

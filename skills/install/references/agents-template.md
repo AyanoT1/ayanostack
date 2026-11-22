@@ -39,9 +39,13 @@ Para las skills de AyanoStack, usa el perfil `github`. <!-- o `bitbucket-jira` -
 - **URL base / healthcheck:** `<ej. http://localhost:3000/health>`
 - **Autenticación local de prueba:** `<cómo obtener sesión de prueba sin guardar secretos en el repo>`
 
-## Checks obligatorios y revisión (`open-pr` / `babysit-pr` / `interrogate`)
+## Checks obligatorios y revisión (`open-pr` / `babysit-pr`)
 - **Checks locales antes de publicar:** `<ej. pnpm typecheck && pnpm lint && pnpm test>`
 - **Checks de CI requeridos:** `<nombres de checks o pipelines>`
 - **Checklist de PR:** `<reglas de título, vínculo a ticket/issue, migraciones, capturas>`
-- **Revisores para `interrogate`:** `<ej. Usa Gemini 4 Neon en esfuerzo alto. Para revisiones multimodelo, suma otro modelo autorizado.>`
+
+## Modelos por rol (`interrogate` / `swarm`)
+<!-- Solo modelos disponibles. `inherit` usa el modelo del chat. -->
+- `interrogate reviewers`: `<modelo A> high, <modelo B> high`
+- `swarm workers`: `inherit`
 ```

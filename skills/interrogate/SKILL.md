@@ -1,6 +1,7 @@
 ---
 name: interrogate
 description: Try to disprove that a diff or design meets its intent. Verify findings with a focused run and report them without editing the change. Use for adversarial review, PR review, or a requested multi-model review.
+disable-model-invocation: true
 ---
 
 <!-- Adapted from pstack by Lauren Tan. See the bundled MIT license. -->

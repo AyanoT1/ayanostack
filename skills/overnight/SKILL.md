@@ -32,7 +32,7 @@ Do not treat the first passing check as the finish line when hours remain in the
 
 - **Go deep before spawning a swarm:** prefer sequential depth first—test alternative approaches, probe edge cases, harden error paths, clean diffs, document decisions, and capture visual evidence. Invoke [swarm](../swarm/SKILL.md) only when independent slices genuinely benefit from parallelism or the user explicitly asked for it.
 - **Verification stack:** pass changes through [blast-radius](../blast-radius/SKILL.md), [interrogate](../interrogate/SKILL.md), [no-comments](../no-comments/SKILL.md), [simplify-diff](../simplify-diff/SKILL.md), and [benchmark-checklist](../benchmark-checklist/SKILL.md) when performance is involved.
-- **Independent review within available models:** when running `interrogate` independently, use the models the user actually has configured (for example, pairing Claude and Gemini if available) rather than assuming a large multi-provider council.
+- **Independent review within available models:** when running `interrogate` independently, use the `interrogate reviewers` panel from the project's `AGENTS.md` or the models the user names, rather than assuming a large multi-provider council.
 - **Evidence capture:** for visible UI or workflow changes, capture real screenshots or a short recording using the host's browser/device tools. Never fabricate screenshots, videos, or benchmark numbers.
 
 ## 3. Keep state on disk and ratchet via Git

@@ -3,6 +3,8 @@ name: assume-task
 description: Take ownership of a ticket or task—distrust the report, reproduce it live with real runtime evidence (JSON, logs, or screenshots), isolate code and history, classify it, update the tracker per AGENTS.md, and deliver up to the project's autonomy ceiling. Use directly on a ticket or spawned from triage.
 ---
 
+<!-- Inspired by pstack's bug-fix and investigation playbooks by Lauren Tan (MIT). See the bundled LICENSE. https://github.com/cursor/plugins/blob/7a583913eb1b8d1a0ee76753d1a2cf072e7b54f9/pstack/skills/poteto-mode/playbooks/bug-fix.md -->
+
 # Assume task
 
 Read the project's `AGENTS.md` to determine the profile (`github` or `bitbucket-jira`), local runtime startup instructions, tracker write permissions, and the **delivery ceiling** for this repo or board (`handoff-only`, `prepare-only`, `draft-pr`, `open-pr`, or `merge-main`). Load only the matching [GitHub](references/github.md) or [Bitbucket + Jira](references/bitbucket-jira.md) reference and read [classification](references/classification.md). If required rules are missing and would risk an unauthorized write or push, confirm before writing externally.
