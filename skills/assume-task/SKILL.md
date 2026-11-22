@@ -1,6 +1,6 @@
 ---
 name: assume-task
-description: Take ownership of a ticket or task—distrust the report, reproduce it live with real runtime evidence (JSON, logs, or screenshots), isolate code and history, classify it, update the tracker per AGENTS.md, and deliver up to the project's autonomy ceiling. Use directly on a ticket or spawned from triage.
+description: Take ownership of a ticket or task—distrust the report, reproduce it live with real runtime evidence (JSON, logs, or screenshots), isolate code and history, classify it, update the tracker per AGENTS.md, and deliver up to the project's autonomy ceiling. Use whenever asked to handle, take, fix, or look into a ticket or issue, or when spawned from triage.
 ---
 
 <!-- Inspired by pstack's bug-fix and investigation playbooks by Lauren Tan (MIT). See the bundled LICENSE. https://github.com/cursor/plugins/blob/7a583913eb1b8d1a0ee76753d1a2cf072e7b54f9/pstack/skills/poteto-mode/playbooks/bug-fix.md -->
