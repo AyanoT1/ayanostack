@@ -8,11 +8,12 @@ Las evals responden dos preguntas: ¿el agente activa la skill cuando correspond
 node evals/run.mjs                          # todos los escenarios de assume-task en los tres brazos
 node evals/run.mjs --scenario bug-prepare-only --trials 3 --model opus
 node evals/run.mjs --dry-run                # arma los repos e imprime el comando sin llamar a un modelo
+node evals/compare.mjs evals/.runs/<antes> evals/.runs/<después>
 ```
 
 Cada corrida usa el CLI `claude` en modo `-p` y consume el límite de uso del plan. Los resultados quedan en `evals/.runs/<fecha>/`, con el transcript, el log de `gh`, `result.json` por corrida y un `summary.md`.
 
-Con una corrida por escenario el resultado es anecdótico. Para decidir si un cambio a una skill ayuda, usa `--trials 3` o más y compara las tasas de checks aprobados por brazo.
+Con una corrida por escenario el resultado es anecdótico. Para mostrar que un cambio a una skill o a la plantilla ayuda, corre la matriz con `--trials 3` antes y después del cambio y compara ambas corridas con `compare.mjs`.
 
 ## Cómo se aísla cada corrida
 
