@@ -7,3 +7,7 @@ Revisa la lista de archivos con `git diff --cached --name-status` y el contenido
 Mantén fuera del repositorio los tokens, claves, contraseñas, archivos `.env` con valores reales, datos personales y material interno del trabajo. Esto también aplica a los ejemplos de comandos, exportaciones, logs y capturas que acompañen a una skill. Usa valores ficticios en los ejemplos.
 
 Si encuentras material sensible, retíralo de lo que se va a comitear y revisa de nuevo. Si ya está en un commit local, limpia ese commit antes de hacer push.
+
+## Antes de hacer push
+
+Corre `node scripts/check-skills.mjs` y corrige lo que reporte. Si cambiaste `evals/graders.mjs` o un `scenarios.json`, corre también `node --test evals/graders.test.mjs`.
