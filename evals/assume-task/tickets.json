@@ -1,0 +1,14 @@
+{
+  "12": {
+    "title": "Order subtotal ignores quantities",
+    "body": "A customer ordered 3 notebooks and 2 pens and was charged for one of each.\n\nRepro: `node src/cli.js orders/sample.json` prints `Subtotal: $5.50`. It should be $15.00."
+  },
+  "14": {
+    "title": "SAVE10 discount code is broken",
+    "body": "A customer applied SAVE10 to a $60.00 order and got no discount. The code is broken. Please fix it so SAVE10 always takes 10% off."
+  },
+  "15": {
+    "title": "CLI crashes on the sample order",
+    "body": "Running `node src/cli.js orders/sample.json` crashes with `TypeError: Cannot read properties of undefined (reading 'reduce')`. Started this week."
+  }
+}

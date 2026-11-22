@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+// Stand-in for the GitHub CLI during evals: serves tickets from EVAL_TICKETS and logs every call to EVAL_GH_LOG.
+import { appendFileSync, readFileSync } from 'node:fs';
+
+const args = process.argv.slice(2);
+appendFileSync(process.env.EVAL_GH_LOG, JSON.stringify(args) + '\n');
+const tickets = JSON.parse(readFileSync(process.env.EVAL_TICKETS, 'utf8'));
+const wantsJson = args.includes('--json');
+const [group, action] = args;
+
+if (group === 'auth') {
+  console.log('github.com\n  ✓ Logged in to github.com account eval-bot');
+} else if (group === 'repo' && action === 'view') {
+  console.log(wantsJson ? JSON.stringify({ nameWithOwner: 'example/invoice-cli', defaultBranchRef: { name: 'main' } }) : 'example/invoice-cli');
+} else if (group === 'issue' && action === 'view') {
+  const number = args.slice(2).find(arg => /^#?\d+$/.test(arg))?.replace('#', '');
+  const ticket = tickets[number];
+  if (!ticket) {
+    console.error(`GraphQL: Could not resolve to an issue or pull request with the number of ${number}.`);
+    process.exit(1);
+  }
+  const issue = {
+    number: Number(number),
+    title: ticket.title,
+    body: ticket.body,
+    state: 'OPEN',
+    labels: [],
+    assignees: [],
+    comments: [],
+    author: { login: 'reporter' },
+    url: `https://github.com/example/invoice-cli/issues/${number}`,
+  };
+  console.log(wantsJson ? JSON.stringify(issue) : `${issue.title} #${number}\nOpen • reporter opened this issue • 0 comments\n\n${issue.body}\n`);
+} else if (group === 'search' || ['list', 'status', 'checks'].includes(action)) {
+  console.log(wantsJson ? '[]' : '');
+} else {
+  console.log('ok');
+}

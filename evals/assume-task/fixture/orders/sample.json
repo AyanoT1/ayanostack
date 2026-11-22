@@ -1,0 +1,7 @@
+{
+  "code": "SAVE10",
+  "items": [
+    { "sku": "NB-01", "price": 400, "qty": 3 },
+    { "sku": "PEN-02", "price": 150, "qty": 2 }
+  ]
+}
