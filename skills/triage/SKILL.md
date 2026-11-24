@@ -13,6 +13,7 @@ Query every declared source so nothing slips between boards:
 
 - **Assigned to you.** All open tickets assigned to the current user across every declared board.
 - **Secondary watch.** When declared in `AGENTS.md`, unassigned urgent, critical, or soon-to-expire tickets on those same boards, kept separate from assigned work.
+- **Blocking others.** Run [aita](../aita/SKILL.md) steps 1 to 3 over your assigned tickets. A ticket of yours that blocks a teammate's urgent work takes the blocked ticket's urgency, even when your own ticket looks low-priority or far from due.
 
 Inspect real status, priority, due date or SLA, age/staleness, linked PRs, and blocking notes. Do not fabricate priorities or guess missing fields.
 

@@ -20,6 +20,7 @@ Skills personales para flujos de ingeniería que uso en la pega y en mis proyect
 
 ## Probando
 
+- [`aita`](skills/aita/SKILL.md) ("Am I The A##hole?", al estilo Reddit) busca tickets y PRs de compañeros que esperan tu trabajo sin terminar y los ordena por la urgencia de lo bloqueado, no por la tuya. `triage` la usa para subir de prioridad lo que bloquea a otros.
 - [`assume-task`](skills/assume-task/SKILL.md) asume un ticket o tarea, replica el fenómeno en vivo con evidencia real (JSON, logs o capturas), clasifica el trabajo (`auto`, `investigate` o `drive`) y llega hasta el techo de entrega definido en `AGENTS.md`.
 - [`benchmark-checklist`](skills/benchmark-checklist/SKILL.md) valida que una medición de rendimiento sostenga la conclusión.
 - [`garden`](skills/garden/SKILL.md) hace mantenimiento de repositorio (código repetido, docs desfasados, higiene y [correct](skills/garden/references/correct.md) para convertir errores recurrentes en restricciones del código).
