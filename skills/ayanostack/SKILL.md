@@ -1,11 +1,13 @@
 ---
-name: install
-description: Set up or update AyanoStack across Claude Code, Codex, Antigravity, and T3 Code. Runs in order, detects what changed upstream since the last install, and only does the steps those changes need, from linking new skills to a project's personal settings or ship-bar profile. Never writes a file a repository tracks or could commit. Use for /install, first-time setup, or after pulling AyanoStack.
+name: ayanostack
+description: Set up or update AyanoStack across Claude Code, Codex, Antigravity, and T3 Code. Runs in order, detects what changed upstream since the last install, and only does the steps those changes need, from linking new skills to a project's personal settings or ship-bar profile. Never writes a file a repository tracks or could commit. Use for /ayanostack, /ayanostack install, first-time setup, or after pulling AyanoStack.
 ---
 
 <!-- Model role lines inspired by pstack's setup-pstack by Lauren Tan (MIT). See the bundled LICENSE. https://github.com/cursor/plugins/blob/7a583913eb1b8d1a0ee76753d1a2cf072e7b54f9/pstack/skills/setup-pstack/SKILL.md -->
 
-# Install
+# AyanoStack
+
+`/ayanostack` and `/ayanostack install` both run the install below. The skill is named after the stack, not `install`, so it does not collide with another pack's `install`.
 
 Every file this skill writes is personal: provider skill roots, personal global instruction files, and files outside git or ignored by it. It never edits a file a repository tracks or could commit, such as a repo's `AGENTS.md`, `CLAUDE.md`, rules folders, or `.gitignore`. [Personal configuration](references/personal-config.md) lists where each thing goes and the check to run before any write.
 

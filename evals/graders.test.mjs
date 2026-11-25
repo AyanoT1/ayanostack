@@ -37,7 +37,7 @@ test('every scenario uses known checks with valid patterns', () => {
 
 test('the fixture AGENTS.md defines the ceilings exactly as the project template does', () => {
   const legend = text => text.split('\n').filter(line => /^- `(handoff-only|prepare-only|draft-pr|open-pr|merge-main)`:/.test(line));
-  const template = legend(readFileSync(new URL('../skills/install/references/agents-template.md', import.meta.url), 'utf8'));
+  const template = legend(readFileSync(new URL('../skills/ayanostack/references/agents-template.md', import.meta.url), 'utf8'));
   assert.equal(template.length, 5);
   assert.deepEqual(legend(readFileSync(new URL('./assume-task/agents.md.tmpl', import.meta.url), 'utf8')), template);
 });

@@ -3,7 +3,7 @@ set -euo pipefail
 
 usage() {
   cat <<'EOF'
-Usage: skills/install/scripts/install.sh [options]
+Usage: skills/ayanostack/scripts/install.sh [options]
 
 Install all AyanoStack skills (directories containing SKILL.md) into one or more
 provider skill roots so relative links between skills and T3 Code `$skill`

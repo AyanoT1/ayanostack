@@ -1,12 +1,12 @@
 # Plantilla de `AGENTS.md` por proyecto
 
-Copia las secciones relevantes a tu configuración personal del proyecto y rellena los valores reales. Esa configuración nunca va en un archivo que el repo versione: usa `.ayanostack/AGENTS.md` en la raíz del repo (ignorado por el gitignore global) o un `AGENTS.md` en una carpeta superior que no esté dentro de ningún repo. `install` deja en las instrucciones globales de cada provider la indicación para encontrarla; ver [configuración personal](personal-config.md). Las skills de AyanoStack leen estas reglas para saber qué plataforma usar, hasta dónde pueden avanzar solas y qué pueden escribir en el tracker.
+Copia las secciones relevantes a tu configuración personal del proyecto y rellena los valores reales. Esa configuración nunca va en un archivo que el repo versione: usa `.ayanostack/AGENTS.md` en la raíz del repo (ignorado por el gitignore global) o un `AGENTS.md` en una carpeta superior que no esté dentro de ningún repo. `ayanostack` deja en las instrucciones globales de cada provider la indicación para encontrarla; ver [configuración personal](personal-config.md). Las skills de AyanoStack leen estas reglas para saber qué plataforma usar, hasta dónde pueden avanzar solas y qué pueden escribir en el tracker.
 
 > **Providers:** no agregues `@AGENTS.md` ni líneas de AyanoStack al `CLAUDE.md` o `AGENTS.md` del repo. Cada provider encuentra esta configuración por la indicación en sus instrucciones globales personales (`~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.gemini/GEMINI.md`).
 
 ```markdown
 # Instrucciones del proyecto para AyanoStack
-<!-- ayanostack: <commit corto> <YYYY-MM-DD> --> <!-- `install` lo escribe y lo usa para saber qué cambió desde la última instalación. -->
+<!-- ayanostack: <commit corto> <YYYY-MM-DD> --> <!-- `ayanostack` lo escribe y lo usa para saber qué cambió desde la última instalación. -->
 
 ## Perfil y plataforma
 Para las skills de AyanoStack, usa el perfil `github`. <!-- o `bitbucket-jira` -->
