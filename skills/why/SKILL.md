@@ -11,4 +11,4 @@ Pin down the choice the user wants explained. Trace its introduction and later c
 
 Separate reasons stated at the time, constraints you can verify today, and your own inferences. Where accounts disagree, use dates, revisions, and direct evidence to explain the disagreement. A later explanation may reflect a different phase of the design.
 
-Lead with the supported reason and the tradeoff it addressed. Link to the evidence beside each material claim, mark inference as inference, and say which question the record leaves open.
+Start with the reason in one or two sentences, and what it traded away. Put a link to the evidence next to each claim. Mark your guesses as guesses. Say what the record does not answer. Write it as [plain replies](../ayanostack/references/plain-replies.md) say.

@@ -13,4 +13,4 @@ In T3 Code, use `t3_thread_search` scoped to the project, then `t3_thread_read` 
 
 Confirm what still holds against the working tree and any linked items, PRs, or decisions. A thread records what someone believed at the time. The current project state can supersede it. Mention when history or a linked source is inaccessible.
 
-Return a short brief with current state, decisions worth carrying forward, open blockers, and the next useful action. Cite links to the actual threads or records for claims that depend on them.
+Return a short brief: where things stand now, the decisions to keep, what is blocked, and the next step. Link the thread or record behind each claim that depends on one. Write it as [plain replies](../ayanostack/references/plain-replies.md) say.

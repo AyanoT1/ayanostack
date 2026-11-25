@@ -16,3 +16,5 @@ Read project instructions, compiler settings, and adjacent patterns first. Keep 
 - Preserve existing public and persisted shapes. Verify boundary, error, and legacy-data cases through project tests where the change affects them.
 
 Favor a change the next team can maintain. A new schema library, type-level abstraction, or migration needs a concrete payoff and its own project decision.
+
+Report each problem with its location, the bad value it lets through, and the fix, as [plain replies](../ayanostack/references/plain-replies.md) say.

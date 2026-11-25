@@ -39,7 +39,7 @@ Rank YTA items by the blocked ticket's urgency: breached or imminent deadline fi
 
 ## 4. Present
 
-Keep each entry terse: your item, the blocked item and its owner, the blocked item's deadline or priority cue, the evidence (link, comment, or review request), the verdict, and one suggested move.
+Keep each entry short: your item, the blocked item and its owner, its deadline or priority, the evidence (link, comment, or review request), the verdict, and one suggested move. Write it as [plain replies](../ayanostack/references/plain-replies.md) say. A draft comment for a teammate follows the same rules.
 
 - **In T3 Code.** Render a small dependency view (`html_preview` then `html_render`): your items on the left, the work they block on the right, colored by verdict.
 - **In CLI or plain text.** One compact Markdown table per verdict, YTA first.

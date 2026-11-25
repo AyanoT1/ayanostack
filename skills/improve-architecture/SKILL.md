@@ -11,6 +11,6 @@ Use the user's proposed area when supplied. Otherwise start with code that chang
 
 Look for implementation details callers have to know, duplicated orchestration, and abandoned paths that attract new callers. Ask whether moving behavior behind an existing interface would concentrate complexity and let more behavior be tested through that interface. Verify presumed dead paths and consider compatibility or the cost of a migration.
 
-Write a local HTML report with a clickable link. For each candidate show the source locations, the current friction, a before and after diagram, the observable benefit, and the scope and risk. Identify the best starting point and any existing decision the candidate would reopen.
+Write a local HTML report with a clickable link. For each candidate show where the code is, what is painful today, a before and after diagram, what gets better in a way someone can see, and how big and risky the change is. Name the best place to start and any past decision the candidate would undo. Write it as [plain replies](../ayanostack/references/plain-replies.md) say.
 
 Explore constraints and design tradeoffs with the user after they pick a candidate. The survey is read-only. Implementation follows a separate request and the project's existing workflow.

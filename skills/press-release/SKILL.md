@@ -7,7 +7,7 @@ description: Create an HTML launch announcement for a product or feature and ret
 
 Save the finished announcement as a local `.html` file. In your final reply, deliver a clickable Markdown link to the generated file using its absolute path.
 
-Write the announcement the product would publish on launch day. Lead with a specific promise worth sharing, then show what it changes in a situation the reader recognizes. Carry the product's voice from the headline through the article. Ground claims in evidence and give readers a way to try the release when access is known.
+Write the announcement the product would publish on launch day. Lead with a specific promise worth sharing, then show what it changes in a situation the reader recognizes. Use the short sentences and common words of [plain replies](../ayanostack/references/plain-replies.md); the product's voice sets the tone, not the vocabulary. Carry the product's voice from the headline through the article. Ground claims in evidence and give readers a way to try the release when access is known.
 
 For a proposal, use the imagined launch to test whether the audience would care and what must be true to deliver the promise. Put draft notices, unconfirmed details, and build assessment in your reply or a separate note outside the announcement. Verify capabilities and availability before publication.
 

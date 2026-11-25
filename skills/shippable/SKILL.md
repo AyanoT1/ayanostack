@@ -154,7 +154,7 @@ These count only with a real failure case. Otherwise they are nits or after-merg
 
 ## Reply
 
-The first line is the verdict (**Ship** or **Not yet**), the tier, and the round. Then:
+Write it as [plain replies](../ayanostack/references/plain-replies.md) say. The first line is the verdict (**Ship** or **Not yet**), the tier with its plain name, and the round. Then:
 
 1. **What it affects:** which output can change, and whether it is easy or hard to undo.
 2. **Bar:** each must-have as met, not met, or not applicable, with its evidence.

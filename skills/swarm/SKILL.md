@@ -12,4 +12,4 @@ Agree on the finish condition, each slice, and the evidence workers should retur
 
 Keep each writing worker in the host's isolated checkout or a separate output folder. Pass the exact source revision and input scope. Give read-only workers clear boundaries. Collect final results through the host's completion flow. Check that each result used the assigned inputs and that its evidence supports its verdict.
 
-Return one report of coverage, tradeoffs, and gaps. Mark missing results explicitly. Preserve artifacts required for review and offer any cleanup audit through [gc](../gc/SKILL.md).
+Return one report: what each worker covered, how the results compare, and what is still missing. Say plainly which results never came back. Write it as [plain replies](../ayanostack/references/plain-replies.md) say. Preserve artifacts required for review and offer any cleanup audit through [gc](../gc/SKILL.md).

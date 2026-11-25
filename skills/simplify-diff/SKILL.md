@@ -13,4 +13,4 @@ For each meaningful addition, ask what fails if it goes away. Test removing spec
 
 For a new helper, try reusing an existing implementation before considering whether to inline it. Check semantic fit and dependency direction. Keep a named helper when its responsibility or contract makes the caller easier to understand, even with one caller. Preserve a shared helper if replacing it would duplicate behavior or bypass a contract.
 
-Run the project's focused checks against each meaningful cut. Restore a cut that changes behavior, and report what you removed or reused and how you verified it.
+Run the project's focused checks against each meaningful cut. Restore a cut that changes behavior. Report what you removed or reused and how you checked it, as [plain replies](../ayanostack/references/plain-replies.md) say.

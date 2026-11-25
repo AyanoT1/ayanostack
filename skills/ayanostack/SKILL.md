@@ -76,4 +76,4 @@ Run only for skills new since the stamp, or whose setup is missing:
 
 Write or update one line at the top of the AyanoStack section in the personal settings file: `<!-- ayanostack: <short HEAD> <YYYY-MM-DD> -->`. The next install diffs from it.
 
-**Reply:** one line per step (done, nothing to do, or blocked and why), the skills added or removed, provider link status, sections written, and anything the user still has to do (a placeholder to fill, a profile to survey, a CLI to install).
+**Reply:** one line per step (done, nothing to do, or blocked and why), the skills added or removed, which providers are linked, the sections written, and anything the user still has to do (a placeholder to fill, a profile to survey, a CLI to install). Write it as [plain replies](references/plain-replies.md) say.

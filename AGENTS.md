@@ -16,6 +16,10 @@ Ninguna skill comitea, crea ramas ni hace push de esos archivos. Cada dev tiene 
 
 Al agregar o revisar una skill, verifica que no indique escribir fuera de `.ayanostack/` en un proyecto ni comitear lo que genera.
 
+## Lo que las skills le escriben a una persona
+
+Toda respuesta, reporte, descripción de PR, comentario en el tracker o página HTML que produce una skill sigue [respuestas simples](skills/ayanostack/references/plain-replies.md). Al agregar una skill, enlázala desde la sección donde la skill define su respuesta.
+
 ## Antes de hacer push
 
 Corre `node scripts/check-skills.mjs` y corrige lo que reporte. Si cambiaste `evals/graders.mjs` o un `scenarios.json`, corre también `node --test evals/graders.test.mjs`.

@@ -26,4 +26,4 @@ Inspect the target scope across the vectors that match the request:
 - Keep hygiene separate from behavior changes unless the user explicitly asked for a fix or feature.
 - Verify every prune with the project's real build, lint, and tests before committing. One concern per commit so each change reviews in minutes.
 - Never weaken tests, relax types, or silence lint rules to make a cleanup pass green.
-- Report findings ranked by leverage and risk: what was pruned (with commits and checks), what enforcement checks were added and proven, and what larger refactors or open questions remain.
+- Report findings ranked by how much they help and how risky they are: what you removed (with commits and checks), which new checks you added and proved, and which larger refactors or open questions remain. Write it as [plain replies](../ayanostack/references/plain-replies.md) say.

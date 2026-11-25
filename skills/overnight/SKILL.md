@@ -48,4 +48,4 @@ Reserve the final window of the budget (or start once every criterion and deep c
 
 1. Re-run the full verification suite on the final head and audit temporary files with [gc](../gc/SKILL.md) (hold the active branch/worktree).
 2. Generate a local HTML [press-release](../press-release/SKILL.md) as the morning report of what was built, improved, or discovered. Embed real screenshots or a short video when relevant, or verified before/after metrics and comparison tables for non-visual work.
-3. Close in the thread with a brief [ketchup](../ketchup/SKILL.md)-style summary: clickable link to the HTML report, branch and commit range, verified results, discarded approaches, remaining gaps, and any decisions waiting on the user.
+3. Close in the thread with a brief [ketchup](../ketchup/SKILL.md)-style summary: a clickable link to the HTML report, the branch and commit range, what works and how you checked it, what you tried and dropped, what is still missing, and any decision waiting on the user. Write the summary and the report as [plain replies](../ayanostack/references/plain-replies.md) say.

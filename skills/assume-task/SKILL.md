@@ -45,7 +45,7 @@ When the mode and classification authorize implementation:
 
 ## 4. Package the handoff
 
-Scale the report to the size of the work—keep it crisp, scannable, and backed by artifacts:
+Scale the report to the size of the work, and back each claim with evidence. Write it, and any tracker comment, as [plain replies](../ayanostack/references/plain-replies.md) say:
 
-- **Routine fix or investigation:** concise bullet handoff (claim, live evidence/screenshot/JSON, classification, root cause, history/existing helpers, and commit/branch/PR state), or a compact in-app visual in T3 Code when side-by-side evidence helps.
+- **Routine fix or investigation:** a short bullet list: what the ticket says, what you saw when you ran it (screenshot or JSON), what kind of work it is, the cause, whether it happened before or a helper already exists, and where the code is now (commit, branch, or PR). In T3 Code, use a small visual when side-by-side evidence helps.
 - **Large or multi-component delivery:** generate a local HTML [press-release](../press-release/SKILL.md) with real screenshots or recordings, plus a short summary and clickable link in the thread.

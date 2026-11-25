@@ -30,4 +30,4 @@ A direct `/interrogate` invocation requests independent review where the host pe
 
 ## Report
 
-Keep a finding when the evidence shows a real violation of intent. Deduplicate by root cause. A review that could not execute a check should name the coverage gap. Report intent, the judges and their model families, verified findings with locations and commands, and open verification gaps. Leave fixes to the caller; `shippable` decides which findings block.
+Keep a finding when the evidence shows a real violation of intent. Deduplicate by root cause. When a review could not run a check, say what went unchecked. Report what the change should do, who judged and their model families, each proven finding with its location and the command that shows it, and what you could not check. Write it as [plain replies](../ayanostack/references/plain-replies.md) say. Leave fixes to the caller; `shippable` decides which findings block.

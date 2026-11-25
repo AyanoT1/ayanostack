@@ -29,6 +29,8 @@ For a quick ballpark the user asked for, one run is enough. Still check question
 
 ## Report
 
+Write the report as [plain replies](../ayanostack/references/plain-replies.md) say. Call the limiter "what slows it down" for readers outside the run.
+
 - Lead with the verdict: faster, slower, no measurable difference, or inconclusive.
 - Give the number with its unit, the run count, the range, and the limiter. For example, "p50 41 ms → 33 ms, median of 7 runs per side, range 32 to 35 ms after, bound by JSON parsing on one core."
 - Call the verdict inconclusive when you claim a difference but cannot name the limiter, when a side ran untuned, or when you could not check questions 4 and 7. Name the gap.

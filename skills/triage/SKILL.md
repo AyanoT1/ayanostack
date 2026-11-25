@@ -31,7 +31,7 @@ Tag every ticket with one execution hint:
 - **Needs you.** Product decision, ambiguous scope, or high-stakes judgment.
 - **Agent-ready.** Small bug report, bounded fix, or self-contained investigation an agent can run in a separate thread while you work elsewhere.
 
-Keep each entry terse—key, short title, board/source, deadline or priority cue, and tag. No prose walls.
+Keep each entry to one line: key, short title, board, deadline or priority, and tag. Write titles and notes as [plain replies](../ayanostack/references/plain-replies.md) say.
 
 ## 3. Present cleanly
 
