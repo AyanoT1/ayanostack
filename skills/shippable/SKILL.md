@@ -7,7 +7,7 @@ description: Answer "is this code shippable?" against the project's own ship bar
 
 Getting from 0 to 70% of a solution is fast. Getting from 70 to 95% takes most of the time, and most of that time goes to structure, patterns, deduplication, and types, which rarely cause the defects that reach production. This skill sets the bar by what the change can break, not by how polished it could be.
 
-The bar is per project and per flow. A screen that feeds a budget or a report someone decides with is not held to the same bar as an admin CRUD. Each repository keeps that calibration in its own **ship-bar profile**, versioned next to the code, because the person who knows what breaks prod is that repo's history.
+The bar is per project and per flow. A screen that feeds a budget or a report someone decides with is not held to the same bar as an admin CRUD. Each repository gets its own **ship-bar profile**, built from that repo's history because that is what knows what breaks prod. The profile is personal: it lives in the repo's `.ayanostack/` folder, which a global gitignore keeps out of every commit. Never commit it or anything else AyanoStack writes: each developer has their own skills, and committed agent files change how other people's agents behave.
 
 ## Not a code review
 
@@ -26,7 +26,7 @@ A code review asks whether the code is good and returns comments. This skill ask
 
 ## Load the profile
 
-1. Read the project's `AGENTS.md` (and the repository's own `AGENTS.md` or `CLAUDE.md`) for a line like `Ship bar: docs/ship-bar.md`. Without one, look for `docs/ship-bar.md`. Read it from the base branch (`git show <base>:docs/ship-bar.md`), not the working tree: a change is never judged by a bar it rewrote. If the diff edits the profile, say so and judge with the base version. If the base has no profile yet but a local branch or worktree does (`git log --all -- docs/ship-bar.md`), use the newest one, name its branch in the verdict, and remind the user to merge it.
+1. Read the project's `AGENTS.md` for a `Ship bar:` line. Without one, look for `.ayanostack/ship-bar.md` in the repo that owns the diff. Check that git ignores it (`git check-ignore -q .ayanostack/ship-bar.md`); if it does not, say so before anything else and do not stage it.
 2. In a workspace with several repos, use the profile of the repo that owns the diff. A change across repos is judged by each repo's profile.
 3. With no profile, say so in one line, use the default tiers below, and offer `survey` at the end. Do not block a verdict on a missing profile.
 4. If the profile is older than about six months or names modules that no longer exist, say so and still use it.

@@ -51,8 +51,8 @@ Para las skills de AyanoStack, usa el perfil `github`. <!-- o `bitbucket-jira` -
 - **Checklist de PR:** `<reglas de título, vínculo a ticket/issue, migraciones, capturas>`
 
 ## Listón de entrega (`shippable`)
-<!-- El perfil vive en el repo, versionado con el código. Créalo con `shippable` en modo `survey`. -->
-- Ship bar: `docs/ship-bar.md`
+<!-- El perfil es personal: vive en `.ayanostack/` dentro de cada repo, ignorado por el gitignore global, y nunca se comitea. Créalo con `shippable` en modo `survey`. -->
+- Ship bar: `.ayanostack/ship-bar.md`
 
 ## Modelos por rol (`interrogate` / `swarm`)
 <!-- Solo modelos disponibles. `inherit` usa el modelo del chat. -->

@@ -1,6 +1,6 @@
 # Ship-bar profile template
 
-Copy into the repository (by default `docs/ship-bar.md`) and point to it from the repo's `AGENTS.md` with a line like `Ship bar: docs/ship-bar.md`. Fill it with [survey](survey.md).
+Save as `.ayanostack/ship-bar.md` in the repository, a folder ignored by the global gitignore, and never commit it. Fill it with [survey](survey.md).
 
 ```markdown
 # Ship bar: <repo>

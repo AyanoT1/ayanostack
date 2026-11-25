@@ -64,7 +64,7 @@ The default tiers and rules in `shippable` come from where practitioners who shi
 - A judge from another model family: pstack's [arena](https://github.com/cursor/plugins/tree/main/pstack/skills/arena); [Replacing Judges with Juries](https://arxiv.org/abs/2404.18796) found a panel of diverse models less biased than one large judge; [Bias in the Loop](https://arxiv.org/pdf/2604.16790) found code judges favor verbose output and their own model family; Karpathy's [llm-council](https://github.com/karpathy/llm-council) anonymizes answers before peers rank them.
 - Each claimed issue re-checked by a separate validator: Anthropic's [code-review plugin](https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-review/commands/code-review.md).
 - A cap on review rounds and an incident ledger: [Waza check](https://github.com/tw93/Waza/blob/main/skills/check/SKILL.md) and [depth-lock](https://github.com/malakhov-dmitrii/depth-lock/blob/main/SKILL.md).
-- Read the review policy from the base ref so a change cannot set its own bar: Compound Engineering's [ce-code-review](https://github.com/EveryInc/compound-engineering-plugin/tree/main/skills/ce-code-review).
+- A per-repository review policy file: Compound Engineering's [ce-code-review](https://github.com/EveryInc/compound-engineering-plugin/tree/main/skills/ce-code-review). `shippable` keeps its profile personal and untracked instead, so it never changes other developers' agents.
 
 Several of these skills keep a middle verdict ("Ready with fixes", "SHIP WITH FOLLOW-UPS", `PASS+NOTES`). `shippable` drops it on purpose.
 

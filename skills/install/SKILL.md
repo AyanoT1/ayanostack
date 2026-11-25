@@ -58,11 +58,13 @@ Read the project's `AGENTS.md`, `git remote -v`, default branch, and manifests (
 
 Preserve unrelated instructions. Never write tokens, credentials, or local machine paths.
 
+Nothing AyanoStack writes inside a project repository is committed: the project's `AGENTS.md` section and anything under `.ayanostack/` stay personal. When the project's `AGENTS.md` is tracked by the repo, ask where the user keeps personal instructions (for example an untracked file or a parent directory's `AGENTS.md`) instead of editing the tracked one.
+
 ## 6. Set up what new skills need in the project
 
 Run only for skills new since the stamp, or whose setup is missing:
 
-- **[shippable](../shippable/SKILL.md):** each repo in scope needs a ship-bar profile (`docs/ship-bar.md`). With none, offer `shippable` in `survey` mode; it runs long and reads the history, so ask first. A profile that exists only on a working branch does not count yet: `shippable` reads it from the base branch. Hand the user the branch to merge, following the project's delivery ceiling.
+- **[shippable](../shippable/SKILL.md):** each repo in scope needs a personal ship-bar profile at `.ayanostack/ship-bar.md`. Make sure the user's global gitignore (`git config --global core.excludesFile`) lists `.ayanostack/`, adding it there if missing. With no profile, offer `shippable` in `survey` mode; it runs long and reads the history, so ask first.
 - **[aita](../aita/SKILL.md) and [triage](../triage/SKILL.md):** the ticket sources in step 5.
 - Any other new skill: check its `SKILL.md` for what it reads from `AGENTS.md` and fill only that.
 
@@ -70,4 +72,4 @@ Run only for skills new since the stamp, or whose setup is missing:
 
 Write or update one line at the top of the project's AyanoStack section: `<!-- ayanostack: <short HEAD> <YYYY-MM-DD> -->`. The next install diffs from it.
 
-**Reply:** one line per step (done, nothing to do, or blocked and why), the skills added or removed, provider link status, sections written, and anything the user still has to do (a placeholder to fill, a profile branch to merge, a CLI to install).
+**Reply:** one line per step (done, nothing to do, or blocked and why), the skills added or removed, provider link status, sections written, and anything the user still has to do (a placeholder to fill, a profile to survey, a CLI to install).

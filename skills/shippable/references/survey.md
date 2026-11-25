@@ -1,6 +1,8 @@
 # Survey: build or refresh a ship-bar profile
 
-The profile answers one question for the repo: which flows need which bar, based on what actually broke. Build it from evidence in the repository, not from general advice. Write it to the path the project's `AGENTS.md` names, or `docs/ship-bar.md`, using the [profile template](profile-template.md). Survey is read-only until you write that one file.
+The profile answers one question for the repo: which flows need which bar, based on what actually broke. Build it from evidence in the repository, not from general advice. Write it to the path the project's `AGENTS.md` names, or `.ayanostack/ship-bar.md` in the repo, using the [profile template](profile-template.md). Survey is read-only until you write that file and its ledger.
+
+The profile is personal and never committed. Before writing, confirm the folder is ignored (`git check-ignore -q .ayanostack/ship-bar.md`). If it is not, add `.ayanostack/` to the user's global gitignore (`git config --global core.excludesFile`), not to the repo's `.gitignore`, and say so. Do not create a branch, commit, or push for it.
 
 ## 1. Read what the repo already says
 
@@ -35,7 +37,7 @@ Deduplicate cherry-picks by subject. Count fixes per flow or module. Then read t
 
 Build an **incident ledger** from the fixes that reached production (tickets, hotfixes, reverts): one row per incident with the date, the flow, the defect class, the earliest check that should have caught it (a must-have, a test, a review, a deploy to a non-production stage), and what catches it now, if anything. Use the tracker's maintenance or bug board when there is one: it records what users actually hit, including incidents with no fix commit that names them. Every incident should land in a flow whose tier's must-haves would have caught it. When one does not, the tier map or the must-haves are wrong; fix the profile, not the ledger.
 
-Agree with the user which repos are in scope. Leave incidents from systems outside that scope (an upstream bot, a legacy service) out of the ledger. When the ledger is longer than a screen, keep it in its own file next to the profile (for example `docs/ship-bar-ledger.md`) and keep only its summary in the profile.
+Agree with the user which repos are in scope. Leave incidents from systems outside that scope (an upstream bot, a legacy service) out of the ledger. When the ledger is longer than a screen, keep it in its own file next to the profile (for example `.ayanostack/ship-bar-ledger.md`) and keep only its summary in the profile.
 
 Record what did **not** cause production fixes too. If structural or visual work never shows up as a fix, the bar should not require more of it.
 
@@ -49,4 +51,4 @@ Keep the profile short enough to read before every check, roughly one or two scr
 
 On refresh, add the new incidents to the ledger and compare the new fix history with the profile's evidence section. Add defect classes that appeared, remove traps that were fixed at the root, and move flows between tiers when their consumers changed. Update the date.
 
-The profile lives in the project repo and can name internal modules. It must not contain credentials, client names, personal data, or production identifiers. Use the repo's normal branch and review flow to land it.
+The profile can name internal modules. It must not contain credentials, client names, personal data, or production identifiers.
