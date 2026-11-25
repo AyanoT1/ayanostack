@@ -67,7 +67,7 @@ Get the strongest evidence that is cheap to get. From weakest to strongest, as [
 
 Look first for the kinds of bugs the profile says reach production in this flow. They matter more than any generic checklist.
 
-Some things look like evidence but do not prove a number is right: tests that only check mock calls, snapshots of the current output, and reading the code again. Real evidence compares against something independent: the previous output, a hand calculation, a direct query, or the old system.
+Some things look like evidence but do not prove a number is right: [tests that cannot fail](../garden/references/tautological-tests.md), such as ones that only check mock calls or pin the current output, and reading the code again. Real evidence compares against something independent: the previous output, a hand calculation, a direct query, or the old system.
 
 ### 4. Sort every finding
 

@@ -7,7 +7,7 @@ Slop is code that looks finished and plausible but was not grounded in the codeb
 | Silent fallback: `\|\| 0`, `?? 0`, `\|\| 1`, `COALESCE(x, 0)`, a `catch` that returns 0, null, or an empty list | Feed the missing input and show what the user sees. A plausible 0 in a number someone decides with is a wrong result. |
 | A symbol, field, endpoint, column, or option that does not exist | Grep the code, the DTOs or schema, and the library source at its pinned version. |
 | Reimplements something the repo already has (a formatter, date helper, lookup, client) | Grep for the existing implementation and compare behavior on one input. |
-| Tests that only assert mocks were called, restate the implementation, or pin the current output as expected | Break the logic on purpose and see whether the test still passes. |
+| Tests that cannot fail: they only assert mocks were called, restate the implementation, or pin the current output as expected | Break the logic on purpose and see whether the test still passes, as in [tautological tests](../../garden/references/tautological-tests.md). |
 | Guards for states the system cannot reach, which also hide the real error path | Trace whether the state can occur. If it cannot, show what the guard swallows when something else goes wrong. |
 | An abstraction, generic, or option with a single caller and no second use in sight | Count callers. Report as a Minimalist finding, not a defect. |
 | Half-finished paths: TODO stubs, branches that return a placeholder, a handler that logs and continues | Call the path and show the placeholder reaching the output. |
