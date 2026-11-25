@@ -11,21 +11,21 @@ Surveyed <YYYY-MM-DD> from <N> fix commits since <date>. Used by the `shippable`
 
 | Flow | Entry points | Tier | Why |
 | --- | --- | --- | --- |
-| <flow> | <paths> | T1 decision | <who decides or receives its output> |
-| <CRUD that writes data a T1 flow reads> | <paths> | T2 feeder | <which T1 flow reads it> |
-| <isolated CRUD> | <paths> | T3 maintenance | |
+| <flow> | <paths> | T1 critical | <who decides or receives its output> |
+| <CRUD that writes data a T1 flow reads> | <paths> | T2 supporting | <which T1 flow reads it> |
+| <isolated CRUD> | <paths> | T3 routine | |
 
 Shared code inherits the highest tier of its consumers: <list hot shared modules>.
 
 ## Must-haves
 
-### T1 decision
+### T1 critical
 - <checkable rule that would have caught the top T1 defect class>
 
-### T2 feeder
+### T2 supporting
 - <rule>
 
-### T3 maintenance
+### T3 routine
 - <rule>. Then stop.
 
 ## Known traps

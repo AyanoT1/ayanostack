@@ -12,7 +12,7 @@ Read the repo's `AGENTS.md` or `CLAUDE.md`, its architecture and convention docs
 
 List the business flows, not the folders. For each, record its entry points, the modules and shared code it runs through, what it outputs, and who consumes that output (a person deciding, a client, another service). Ask the user which flows they consider critical if the code does not make it clear.
 
-Assign each flow a tier (`T1 decision`, `T2 feeder`, `T3 maintenance`, `T4 throwaway`, as defined in [the skill](../SKILL.md#default-tiers-no-profile)). Mark shared code and the CRUDs that write data a T1 flow reads as `T2`.
+Assign each flow a tier (`T1 critical`, `T2 supporting`, `T3 routine`, `T4 throwaway`, as defined in [the skill](../SKILL.md#default-tiers-no-profile)). Mark shared code, and the CRUDs that write data a T1 flow reads, as `T2`.
 
 ## 3. Read the current bar per flow
 
