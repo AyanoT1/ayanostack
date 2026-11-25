@@ -1,8 +1,8 @@
 # Plantilla de `AGENTS.md` por proyecto
 
-Copia las secciones relevantes al `AGENTS.md` de tu repositorio y rellena los valores reales del proyecto. Las skills de AyanoStack leen estas reglas para saber qué plataforma usar, hasta dónde pueden avanzar solas y qué pueden escribir en el tracker.
+Copia las secciones relevantes a tu configuración personal del proyecto y rellena los valores reales. Esa configuración nunca va en un archivo que el repo versione: usa `.ayanostack/AGENTS.md` en la raíz del repo (ignorado por el gitignore global) o un `AGENTS.md` en una carpeta superior que no esté dentro de ningún repo. `install` deja en las instrucciones globales de cada provider la indicación para encontrarla; ver [configuración personal](personal-config.md). Las skills de AyanoStack leen estas reglas para saber qué plataforma usar, hasta dónde pueden avanzar solas y qué pueden escribir en el tracker.
 
-> **Compatibilidad entre providers:** Codex y Antigravity leen `AGENTS.md` de forma nativa. Claude Code prioriza `CLAUDE.md` y omite `AGENTS.md` si existe cualquier `CLAUDE.md` en el repo o en directorios padre; para garantizar lectura en los tres, añade `@AGENTS.md` en el `CLAUDE.md` del repositorio.
+> **Providers:** no agregues `@AGENTS.md` ni líneas de AyanoStack al `CLAUDE.md` o `AGENTS.md` del repo. Cada provider encuentra esta configuración por la indicación en sus instrucciones globales personales (`~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.gemini/GEMINI.md`).
 
 ```markdown
 # Instrucciones del proyecto para AyanoStack

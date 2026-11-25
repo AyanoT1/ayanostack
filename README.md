@@ -53,7 +53,7 @@ Usa [`install`](skills/install/SKILL.md) para enlazar las skills en una misma ra
 - [GitHub](docs/profiles/github.md) para proyectos personales.
 - [Plantilla de `AGENTS.md`](skills/install/references/agents-template.md) para configurar tableros, techo de autonomía (`prepare-only`, `open-pr`, `merge-main`), escritura en el tracker, verificación local y modelos por rol de `interrogate` y `swarm` por proyecto.
 
-En el `AGENTS.md` de cada proyecto declara el perfil con una línea como `Para las skills de AyanoStack, usa el perfil bitbucket-jira.` Para un proyecto personal, usa `github`. Ahí mismo deja los tableros de `triage`, el techo de entrega de `assume-task`, permisos de escritura en el tracker, cómo levantar la app en local, el checklist de PR y los checks requeridos.
+En tu configuración personal de cada proyecto (`.ayanostack/AGENTS.md` en la raíz del repo, o un `AGENTS.md` en una carpeta superior fuera de git; nunca el `AGENTS.md` o `CLAUDE.md` que versiona el repo) declara el perfil con una línea como `Para las skills de AyanoStack, usa el perfil bitbucket-jira.` Para un proyecto personal, usa `github`. Ahí mismo deja los tableros de `triage`, el techo de entrega de `assume-task`, permisos de escritura en el tracker, cómo levantar la app en local, el checklist de PR y los checks requeridos.
 
 Cada `SKILL.md` define el flujo común. `triage`, `assume-task`, `open-pr` y `babysit-pr` leen únicamente la referencia del perfil declarado. La máquina personal usa `gh` o las herramientas de T3 Code para GitHub. La del trabajo usa `twg` para Bitbucket y Jira. Si falta el perfil o la autorización de escritura, confírmalo antes de escribir en una plataforma.
 
