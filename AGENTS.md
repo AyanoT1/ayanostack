@@ -8,6 +8,14 @@ Mantén fuera del repositorio los tokens, claves, contraseñas, archivos `.env` 
 
 Si encuentras material sensible, retíralo de lo que se va a comitear y revisa de nuevo. Si ya está en un commit local, limpia ese commit antes de hacer push.
 
+## Lo que las skills dejan en un proyecto
+
+Todo lo que una skill escribe dentro del repositorio de un proyecto (perfiles como `ship-bar.md`, registros de incidentes, configuración o notas para agentes) va en la carpeta `.ayanostack/` de ese repo. Esa carpeta la ignora el gitignore global del usuario (`git config --global core.excludesFile`), nunca el `.gitignore` del proyecto.
+
+Ninguna skill comitea, crea ramas ni hace push de esos archivos. Cada dev tiene sus propias skills instaladas, y un archivo de agente comiteado cambia cómo se comportan los agentes del resto del equipo. La sección de AyanoStack en el `AGENTS.md` de un proyecto también es personal: si ese `AGENTS.md` está versionado, usa un archivo sin versionar o el `AGENTS.md` de un directorio padre.
+
+Al agregar o revisar una skill, verifica que no indique escribir fuera de `.ayanostack/` en un proyecto ni comitear lo que genera.
+
 ## Antes de hacer push
 
 Corre `node scripts/check-skills.mjs` y corrige lo que reporte. Si cambiaste `evals/graders.mjs` o un `scenarios.json`, corre también `node --test evals/graders.test.mjs`.
