@@ -17,6 +17,8 @@ Options:
   --force               Replace existing entries at the destination.
   --dry-run             Show planned actions without modifying the filesystem.
   --check               Verify existing links across configured targets only.
+  --prune               Remove stale links that point into this repo's skills/
+                        but whose skill no longer exists.
   -h, --help            Show this help message.
 EOF
 }
@@ -30,6 +32,7 @@ MODE="symlink"
 FORCE=0
 DRY_RUN=0
 CHECK_ONLY=0
+PRUNE=0
 
 provider_dir() {
   case "$1" in
@@ -76,6 +79,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --check)
       CHECK_ONLY=1
+      shift
+      ;;
+    --prune)
+      PRUNE=1
       shift
       ;;
     -h|--help)
@@ -159,8 +166,32 @@ for target in "${TARGETS[@]}"; do
     installed=$((installed + 1))
   done
 
+  stale=0
+  if [[ -d "$target" ]]; then
+    for link in "$target"/*; do
+      [[ -L "$link" ]] || continue
+      dest_raw="$(readlink "$link")"
+      case "$dest_raw" in
+        "${SKILLS_SRC}"/*) ;;
+        *) continue ;;
+      esac
+      [[ -f "${dest_raw}/SKILL.md" ]] && continue
+      stale=$((stale + 1))
+      if [[ "$PRUNE" -eq 1 && "$CHECK_ONLY" -eq 0 ]]; then
+        if [[ "$DRY_RUN" -eq 1 ]]; then
+          echo "  prune   ${link} -> ${dest_raw}"
+        else
+          rm "$link"
+          echo "  pruned  ${link}"
+        fi
+      else
+        echo "  stale   $(basename "$link") (${dest_raw} no longer exists; pass --prune to remove)"
+      fi
+    done
+  fi
+
   if [[ "$CHECK_ONLY" -eq 1 ]]; then
-    echo "  status: ${ok} linked, ${missing} missing/diverged"
+    echo "  status: ${ok} linked, ${missing} missing/diverged, ${stale} stale"
   else
     echo "  done (${MODE}): ${installed} installed, ${skipped} already present/skipped"
   fi

@@ -6,6 +6,7 @@ Copia las secciones relevantes al `AGENTS.md` de tu repositorio y rellena los va
 
 ```markdown
 # Instrucciones del proyecto para AyanoStack
+<!-- ayanostack: <commit corto> <YYYY-MM-DD> --> <!-- `install` lo escribe y lo usa para saber qué cambió desde la última instalación. -->
 
 ## Perfil y plataforma
 Para las skills de AyanoStack, usa el perfil `github`. <!-- o `bitbucket-jira` -->
@@ -49,8 +50,12 @@ Para las skills de AyanoStack, usa el perfil `github`. <!-- o `bitbucket-jira` -
 - **Checks de CI requeridos:** `<nombres de checks o pipelines>`
 - **Checklist de PR:** `<reglas de título, vínculo a ticket/issue, migraciones, capturas>`
 
+## Listón de entrega (`shippable`)
+<!-- El perfil vive en el repo, versionado con el código. Créalo con `shippable` en modo `survey`. -->
+- Ship bar: `docs/ship-bar.md`
+
 ## Modelos por rol (`interrogate` / `swarm`)
 <!-- Solo modelos disponibles. `inherit` usa el modelo del chat. -->
-- `interrogate reviewers`: `<modelo A> high, <modelo B> high`
+- `interrogate reviewers`: `<modelo A> high, <modelo B> high` <!-- Incluye al menos un modelo de otra familia que el que escribe el código: el consejo de `interrogate` es ciego y los jueces favorecen código parecido al suyo. -->
 - `swarm workers`: `inherit`
 ```

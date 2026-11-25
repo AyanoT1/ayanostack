@@ -27,12 +27,13 @@ Skills personales para flujos de ingeniería que uso en la pega y en mis proyect
 - [`gc`](skills/gc/SKILL.md) audita worktrees, ramas y residuos, y borra únicamente los elementos confirmados.
 - [`improve-architecture`](skills/improve-architecture/SKILL.md) presenta oportunidades concretas de refactor en un informe HTML.
 - [`install`](skills/install/SKILL.md) instala o enlaza las skills en tu máquina y configura el `AGENTS.md` de un repositorio a partir de la plantilla.
-- [`interrogate`](skills/interrogate/SKILL.md) intenta romper el cambio y solo reporta hallazgos que una ejecución prueba. Usa el panel de revisores declarado en el `AGENTS.md` del proyecto. Solo se invoca a pedido (`/interrogate`) o desde otra skill que la enlaza.
+- [`interrogate`](skills/interrogate/SKILL.md) intenta romper el cambio y solo reporta hallazgos que una ejecución prueba. Corre como un revisor o como un consejo ciego de jueces de distintas familias de modelos, con un lente de slop (código plausible pero sin base en el repo: fallbacks silenciosos, símbolos inventados, helpers reimplementados, tests que no pueden fallar). Usa el panel declarado en el `AGENTS.md` del proyecto. Solo se invoca a pedido (`/interrogate`, también a mitad de sesión) o desde otra skill que la enlaza.
 - [`open-pr`](skills/open-pr/SKILL.md) prepara, abre o actualiza un PR con el checklist del proyecto.
 - [`overnight`](skills/overnight/SKILL.md) ejecuta trabajo largo y desatendido (`todo-list`, `implement-feature`, `research-feature`, `fixes`, `gardening`) aprovechando el tiempo disponible para verificar a fondo y cerrar con un reporte en HTML (`press-release`).
 - [`press-release`](skills/press-release/SKILL.md) entrega un enlace al anuncio de lanzamiento en HTML.
 - [`recall`](skills/recall/SKILL.md) recupera contexto reciente de un tema entre chats y lo contrasta con el estado actual.
 - [`reflect`](skills/reflect/SKILL.md) convierte lecciones de una sesión en propuestas concretas para el flujo de trabajo.
+- [`shippable`](skills/shippable/SKILL.md) responde "¿esto se puede shipear?" con el listón de cada proyecto: cada repo guarda su perfil (`docs/ship-bar.md`) con tiers por flujo, sacados de su historial de fixes. El veredicto es binario (Ship o Not yet, sin "ship con follow-ups"): solo bloquea con una falla concreta y dice cuándo dejar de pulir. Lo da un juez que no escribió el cambio, vale solo para esa versión del código y corta en tres rondas. Se corre sola a mitad de sesión o como compuerta final de `open-pr`. `survey` arma o refresca el perfil.
 - [`simplify-diff`](skills/simplify-diff/SKILL.md) recorta un diff tras buscar primero lo que ya resuelve el repo.
 - [`swarm`](skills/swarm/SKILL.md) reparte un trabajo en paralelo o compara modelos por encargo. Queda para tareas que justifiquen ese costo, así que solo se invoca a pedido (`/swarm`).
 - [`triage`](skills/triage/SKILL.md) revisa los tableros declarados en `AGENTS.md`, arma un snapshot diario priorizado (asignados a ti + urgentes sin asignar), marca candidatos delegables y lanza threads de `assume-task` tras tu confirmación.
@@ -44,7 +45,7 @@ Skills personales para flujos de ingeniería que uso en la pega y en mis proyect
 Usa [`install`](skills/install/SKILL.md) para enlazar las skills en una misma raíz y que sus referencias relativas funcionen en Claude Code, Codex, Antigravity y T3 Code.
 
 - **Entrada diaria:** [`triage`](skills/triage/SKILL.md) revisa los tableros declarados en `AGENTS.md` y lanza [`assume-task`](skills/assume-task/SKILL.md) sobre los tickets confirmados para replicar en vivo, clasificar y avanzar hasta el techo del proyecto.
-- **Cierre de PR:** [`open-pr`](skills/open-pr/SKILL.md) prepara el cambio con [pre-PR](skills/open-pr/references/pre-pr.md) ([causa raíz](skills/open-pr/references/right-fix.md), `simplify-diff`, `no-comments`, `interrogate` y `blast-radius`). Tras los checks del proyecto, publica el PR, audita residuos con `gc` y entrega seguimiento a `babysit-pr`. Para revisar sin publicar, pide `open-pr` en modo preparación.
+- **Cierre de PR:** [`open-pr`](skills/open-pr/SKILL.md) prepara el cambio con [pre-PR](skills/open-pr/references/pre-pr.md) ([causa raíz](skills/open-pr/references/right-fix.md), `simplify-diff`, `no-comments`, `interrogate`, `blast-radius` y `shippable` como veredicto final: publica solo con Ship). Tras los checks del proyecto, publica el PR, audita residuos con `gc` y entrega seguimiento a `babysit-pr`. Para revisar sin publicar, pide `open-pr` en modo preparación.
 
 ## Perfiles por proyecto
 
